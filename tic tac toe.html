@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.O">
+    <title>Tic tac toe</title>
+    <style>
+        /* * {
+            margin: Opx;
+            padding: Opx;
+        } */
+        #full {
+            margin-left: -20px;
+        }
+
+        body {
+            background: linear-gradient(0.4turn, #1e7a91, #d5ddd0, #f69d3c, violet);
+        }
+
+        #info {
+            opacity: 2;
+        }
+
+        @media screen and (max-width:380px) {
+            #info {
+                width: 300px;
+            }
+        }
+
+        @media screen and (max-width:430px) {
+            #info {
+                width: 300px;
+                /* margin-left: 20px; */
+            }
+        }
+
+        #container {
+            position: absolute;
+            top: 160px;
+            left: 580px;
+        }
+
+        @media screen and (max-width:380px) {
+            #container {
+                position: absolute;
+                top: 160px;
+                left: 56px;
+                width: 275px;
+            }
+        }
+
+        #wlc {
+            margin-top: -100px;
+            margin-left: -55px;
+            font-size: 50px;
+        }
+
+        @media screen and (max-width:380px) {
+            #wlc {
+                margin-top: -70px;
+                margin-left: 39px;
+                font-size: 30px;
+                width: 337x;
+            }
+
+        }
+
+        #player {
+            margin-top: -50px;
+            font-size: 30px;
+            margin-left: -50px;
+        }
+
+        @media screen and (max-width:380px) {
+            #player {
+                margin-top: -22px;
+                font-size: 25px;
+                margin-left: 8px;
+                width: 245px;
+            }
+        }
+
+        .int {
+
+            height: 30px;
+            width: 40px;
+        }
+
+        #p1,
+        #p2,
+        #p3 {
+            width: 30px;
+            height: 40px;
+            padding-left: 20px;
+            border: 1mm ridge;
+            background-color: rgb(220, 218, 218);
+            border-radius: 5px 10px 5px 10px;
+        }
+
+        @media screen and (max-width:380px) {
+
+            #p1,
+            #p2,
+            #p3 {
+                margin-left: 18px;
+                width: 30px;
+                height: 40px;
+                padding-left: 20px;
+                border: 1mm ridge;
+                background-color: rgb(220, 218, 218);
+                border-radius: 5px 10px 5px 10px;
+            }
+        }
+
+        #p4,
+        #p5,
+        #p6 {
+            width: 30px;
+            height: 40px;
+            padding-left: 20px;
+            position: relative;
+            top: 10px;
+            left: -100;
+            border: 1mm ridge;
+            background-color: rgb(220, 218, 218);
+            border-radius: 5px 10px 5px 10px;
+        }
+
+        @media screen and (max-width:380px) {
+
+            #p4,
+            #p5,
+            #p6 {
+                margin-left: 18px;
+                width: 30px;
+                height: 40px;
+                padding-left: 20px;
+                position: relative;
+                top: 10px;
+                left: -100;
+                border: 1mm ridge;
+                background-color: rgb(220, 218, 218);
+                border-radius: 5px 10px 5px 10px;
+            }
+        }
+
+        #p7,
+        #p8,
+        #p9 {
+            width: 30px;
+            height: 40px;
+            padding-left: 20px;
+            position: relative;
+            top: 20px;
+            border: 1mm ridge;
+            background-color: rgb(220, 218, 218);
+            border-radius: 5px 10px 5px 10px;
+        }
+
+        @media screen and (max-width:380px) {
+
+            #p7,
+            #p8,
+            #p9 {
+                margin-left: 18px;
+                width: 30px;
+                height: 40px;
+                padding-left: 20px;
+                position: relative;
+                top: 20px;
+                border: 1mm ridge;
+                background-color: rgb(220, 218, 218);
+                border-radius: 5px 10px 5px 10px;
+            }
+        }
+
+        #reset {
+            position: absolute;
+            top: 245px;
+            left: -7px;
+            height: 60px;
+            width: 200px;
+            border-radius: 5px 5px 40px 40px;
+            font-family: cursive;
+            font-size: 20px;
+            color: #073743;
+            border: 1.5mm double darkolivegreen;
+            background-color: rgb(168, 248, 190);
+        }
+
+        @media screen and (max-width:380px) {
+            #reset {
+                margin-left: 38px;
+                margin-top: -10px;
+            }
+        }
+
+        #print {
+            position: relative;
+            top: 145px;
+            left: 40px;
+            width: 500px;
+            color: rgb(82, 22, 223);
+            font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+        }
+
+        @media screen and (max-width:380px) {
+            #print {
+                margin-left: 30px;
+                margin-top: 20px;
+            }
+        }
+
+        #points {
+            display: flex;
+            position: absolute;
+            top: 365px;
+            left: -15px;
+        }
+
+        #pt1,
+        #pt2,
+        #pt3 {
+            margin-left: 5px;
+        }
+
+        #x,
+        #tie,
+        #o {
+            margin-left: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="full">
+        <div id="container">
+            <div id="info">
+                <p id="wlc">GAME ZONE</p>
+                <p id="player">First player start with X</p>
+            </div>
+            <input type="text" class="int" id="p1" onclick="func3();func();" readonly>
+            <input type="text" class="int" id="p2" onclick="func4();func();" readonly>
+            <input type="text" class="int" id="p3" onclick="func5();func();" readonly>
+            <br>
+            <input type="text" class="int" id="p4" onclick="func6();func();" readonly>
+            <input type="text" class="int" id="p5" onclick="func7();func();" readonly>
+            <input type="text" class="int" id="p6" onclick="func8();func();" readonly>
+            <br>
+            <input type="text" class="int" id="p7" onclick="func9();func();" readonly>
+            <input type="text" class="int" id="p8" onclick="func10();func();" readonly>
+            <input type="text" class="int" id="p9" onclick="func11();func();" readonly>
+
+            <button id="reset" onclick="func2()"> Reset</button>
+            <p id="print" onclick="points()"></p>
+            <div id="points" onclick="points()">
+                <h3 id="x">X =</h3>
+                <h4 id="pt1">0</h4>
+                <h3 id="tie">Tie =</h3>
+                <h4 id="pt2">0</h4>
+                <h3 id="o">O =</h3>
+                <h4 id="pt3">0</h4>
+            </div>
+        </div>
+    </div>
+    <script>
+        let q = document.getElementById('print').innerHTML = 'X Player is winner';
+        function points() {
+            let x = 0
+            if (flag == 1) {
+                document.getElementById('pt3').innerHTML = x + 1;
+                flag = 0
+            }
+            else{
+                document.getElementById('pt1').innerHTML = x + 1;
+            }
+        }
+        function func() {
+            var b1, b2, b3, b4, b5, b6, b7, b8, b9;
+            b1 = document.getElementById("p1").value;
+            b2 = document.getElementById("p2").value;
+            b3 = document.getElementById("p3").value;
+            b4 = document.getElementById("p4").value;
+            b5 = document.getElementById("p5").value;
+            b6 = document.getElementById("p6").value;
+            b7 = document.getElementById("p7").value;
+            b8 = document.getElementById("p8").value;
+            b9 = document.getElementById("p9").value;
+            //1//           
+            if ((b1 == 'X' || b1 == 'x') && (b2 == 'X' || b2 == 'x') && (b3 == 'X' || b3 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //2//
+            else if ((b4 == 'X' || b4 == 'x') && (b5 == 'X' || b5 == 'x') && (b6 == 'X' || b6 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //3//
+            else if ((b7 == 'X' || b7 == 'x') && (b8 == 'X' || b8 == 'x') && (b9 == 'X' || b9 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p6').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //4//
+            else if ((b1 == 'X' || b1 == 'x') && (b4 == 'X' || b4 == 'x') && (b7 == 'X' || b7 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //5//
+            else if ((b2 == 'X' || b2 == 'x') && (b5 == 'X' || b5 == 'x') && (b8 == 'X' || b8 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //6//
+            else if ((b3 == 'X' || b3 == 'x') && (b6 == 'X' || b6 == 'x') && (b9 == 'X' || b9 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //7//
+            else if ((b1 == 'X' || b1 == 'x') && (b5 == 'X' || b5 == 'x') && (b9 == 'X' || b9 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //8//
+            else if ((b3 == 'X' || b3 == 'x') && (b5 == 'X' || b5 == 'x') && (b7 == 'X' || b7 == 'x')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //1//           
+            else if ((b1 == 'O' || b1 == 'o') && (b2 == 'O' || b2 == 'o') && (b3 == 'O' || b3 == 'o')) {
+                document.getElementById('print').innerHTML = 'O Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player O won')
+            }
+            //2//
+            else if ((b4 == 'O' || b4 == 'o') && (b5 == 'O' || b5 == 'o') && (b6 == 'O' || b6 == 'o')) {
+                document.getElementById('print').innerHTML = 'O player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player o won')
+            }
+            //3//
+            else if ((b7 == 'O' || b7 == 'o') && (b8 == 'O' || b8 == 'o') && (b9 == 'O' || b9 == 'o')) {
+                document.getElementById('print').innerHTML = 'O player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p6').disabled = true;
+                window.alert('CONGRATULATION! Player O won')
+            }
+            //4//
+            else if ((b1 == 'O' || b1 == 'o') && (b4 == 'O' || b4 == 'o') && (b7 == 'O' || b7 == 'o')) {
+                document.getElementById('print').innerHTML = 'O Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player O won')
+            }
+            //5//
+            else if ((b2 == 'O' || b2 == 'o') && (b5 == 'O' || b5 == 'o') && (b8 == 'O' || b8 == 'o')) {
+                document.getElementById('print').innerHTML = 'O Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player O won')
+            }
+            //6//
+            else if ((b3 == 'O' || b3 == 'o') && (b6 == 'O' || b6 == 'o') && (b9 == 'O' || b9 == 'o')) {
+                document.getElementById('print').innerHTML = 'O Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p5').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                window.alert('CONGRATULATION! Player O won')
+            }
+            //7//
+            else if ((b1 == 'O' || b1 == 'o') && (b5 == 'O' || b5 == 'o') && (b9 == 'O' || b9 == 'o')) {
+                document.getElementById('print').innerHTML = 'X Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p3').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p7').disabled = true;
+                document.getElementById('p8').disabled = true;
+                window.alert('CONGRATULATION! Player X won')
+            }
+            //8//
+            else if ((b3 == 'O' || b3 == 'o') && (b5 == 'O' || b5 == 'o') && (b7 == 'O' || b7 == 'o')) {
+                document.getElementById('print').innerHTML = 'O Player is winner';
+                document.getElementById('print').style.color = 'black';
+                document.getElementById('print').style.left = '13px';
+                document.getElementById('p1').disabled = true;
+                document.getElementById('p2').disabled = true;
+                document.getElementById('p4').disabled = true;
+                document.getElementById('p6').disabled = true;
+                document.getElementById('p8').disabled = true;
+                document.getElementById('p9').disabled = true;
+                window.alert('CONGRATULATION! Player O won')
+            }
+            else if ((b1 == 'X' || b1 == 'O') && (b2 == 'X' || b2 == 'O') && (b3 == 'X' || b3 == 'O') && (b4 == 'X' || b4 == 'O') && (b5 == 'X' || b5 == 'O') && (b6 == 'X' || b6 == 'O') && (b7 == 'X' || b7 == 'O') && (b8 == 'X' || b8 == 'O') && (b9 == 'X' || b9 == 'O')) {
+                document.getElementById('print').innerHTML = 'Match is Tie'
+                window.alert('GAME OVER! Match is Tie')
+            }
+            else
+                if (flag == 1) {
+                    document.getElementById('print').innerHTML = 'Player X turn'
+                }
+                else {
+                    document.getElementById('print').innerHTML = 'Player O turn'
+                }
+        }
+        function func2() {
+            location.reload();
+            document.getElementById('p1').value = '';
+            document.getElementById('p2').value = '';
+            document.getElementById('p3').value = '';
+            document.getElementById('p4').value = '';
+            document.getElementById('p5').value = '';
+            document.getElementById('p6').value = '';
+            document.getElementById('p7').value = '';
+            document.getElementById('p8').value = '';
+            document.getElementById('p9').value = '';
+        }
+        flag = 1;
+        function func3() {
+            if (flag == 1) {
+                document.getElementById('p1').value = 'X'
+                document.getElementById('p1').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p1').value = 'O'
+                document.getElementById('p1').disabled = true;
+                flag = 1;
+            }
+        }
+        function func4() {
+
+            if (flag == 1) {
+                document.getElementById('p2').value = 'X'
+                document.getElementById('p2').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p2').value = 'O'
+                document.getElementById('p2').disabled = true;
+                flag = 1;
+            }
+        }
+        function func5() {
+
+            if (flag == 1) {
+                document.getElementById('p3').value = 'X'
+                document.getElementById('p3').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p3').value = 'O'
+                document.getElementById('p3').disabled = true;
+                flag = 1;
+            }
+        }
+        function func6() {
+
+            if (flag == 1) {
+                document.getElementById('p4').value = 'X'
+                document.getElementById('p4').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p4').value = 'O'
+                document.getElementById('p4').disabled = true;
+                flag = 1;
+            }
+        }
+        function func7() {
+            if (flag == 1) {
+                document.getElementById('p5').value = 'X'
+                document.getElementById('p5').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p5').value = 'O'
+                document.getElementById('p5').disabled = true;
+                flag = 1;
+            }
+        }
+        function func8() {
+            if (flag == 1) {
+                document.getElementById('p6').value = 'X'
+                document.getElementById('p6').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p6').value = 'O'
+                document.getElementById('p6').disabled = true;
+                flag = 1;
+            }
+        }
+        function func9() {
+            if (flag == 1) {
+                document.getElementById('p7').value = 'X'
+                document.getElementById('p7').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p7').value = 'O'
+                document.getElementById('p7').disabled = true;
+                flag = 1;
+            }
+        }
+        function func10() {
+            if (flag == 1) {
+                document.getElementById('p8').value = 'X'
+                document.getElementById('p8').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p8').value = 'O'
+                document.getElementById('p8').disabled = true;
+                flag = 1;
+            }
+        }
+        function func11() {
+            if (flag == 1) {
+                document.getElementById('p9').value = 'X'
+                document.getElementById('p9').disabled = true;
+                flag = 0;
+            }
+            else {
+                document.getElementById('p9').value = 'O'
+                document.getElementById('p9').disabled = true;
+                flag = 1;
+            }
+        }
+    </script>
+</body>
+
+</html>
