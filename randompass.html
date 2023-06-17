@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Random Password</title>
         <style>
-            html{
+            body{
                 /* background-color: red; */
                 background: linear-gradient(0.4turn, #1e7a91, #29e454,  violet, #f69d3c);
                 height: 587.5px;
@@ -17,7 +17,13 @@
                 animation-iteration-count: infinite;
                 animation-timing-function: linear;
             }
-
+             @media screen and (max-width:450px) {
+            body{
+                /* height: 500px; */
+                background: no-repeat;
+                width: 20px;
+            }
+        }
             #full {
                 background-color: gray;
                 height: 352px;
@@ -27,7 +33,11 @@
                 border-radius: 20px;
                 box-shadow: 10px 5px 15px 3px rgba(52, 52, 52, 0.457);
             }
-
+              @media screen and (max-width:450px) {
+            #full{
+                margin-left: 50px;
+            }
+        }
             @keyframes moin {
                 0% {
                     /* box-shadow: -.1px -0px 55px 20px rgb(162, 10, 232); */
@@ -160,6 +170,25 @@
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 color: darkblue;
             }
+             @media screen and (max-width:450px) {
+            #heading{
+                position: relative;
+                left: -390px;
+                width: 400px;
+            }
+        }
+        #name{
+            opacity: 0;
+        }
+        @media screen and (max-width:450px) {
+        #name{
+            opacity: 2;
+            position: absolute;
+            top: 80px;
+            left: 390px;
+            background: no-repeat;
+        }
+        }
         </style>
     </head>
 
@@ -184,6 +213,17 @@
             </div>
             <div id="gen">
                 <button id="btn" type="button">Generate</button>
+            </div>
+            <div id="name">
+                <h3>Made by</h3>
+                <h2>M</h2>
+                <h2>O</h2>
+                <h2>I</h2>
+                <h2>N</h2>
+                <h2>K</h2>
+                <h2>H</h2>
+                <h2>A</h2>
+                <h2>N</h2>
             </div>
         </div>
         <script>
