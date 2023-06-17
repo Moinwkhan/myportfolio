@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Counting</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: lightgrey;
+        }
+
+        #whole {
+            position: relative;
+            left: 374px;
+            top: 39px;
+            background-color: white;
+            width: 560px;
+            height: 440px;
+            border-radius: 20px 20px 130px 20px;
+            box-shadow: 10px 5px 5px rgba(52, 52, 52, 0.457);
+            z-index: 999;
+        }
+
+        h3 {
+            color: rgb(140, 138, 138);
+            padding-left: 22px;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #head {
+            margin-left: -22px;
+        }
+
+        input {
+            height: 35px;
+            width: 100px;
+            padding-left: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bolder;
+
+        }
+
+        #input2 {
+            margin-left: 22px;
+        }
+
+        #input3 {
+            margin-left: 22px;
+        }
+
+        #full {
+            display: flex;
+            padding: 30px;
+            padding-left: 50px;
+        }
+
+        .output {
+            display: flex;
+            margin-top: 14px;
+            margin-left: 3rem;
+            font-size: 30px;
+            font-weight: bolder;
+            font-family: cursive;
+        }
+
+        .out {
+            margin-top: -0.5rem;
+        }
+
+        .purple {
+            color: #6b19de;
+            /* font-weight: bolder; */
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        #btn {
+            margin-left: 23rem;
+            margin-top: 10px;
+            height: 4rem;
+            width: 10rem;
+            border-radius: 20px;
+            background-color: #6b19de;
+            color: antiquewhite;
+        }
+
+        .coded {
+            margin-left: 67rem;
+            margin-top: 6rem;
+            color: #30336b;
+            font-family: cursive;
+        }
+        .challenge{
+            margin-top: -23px;
+            margin-left: 24px;
+            color: #30336b;
+            font-family: cursive;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="whole">
+        <div id="full">
+            <div>
+                <h3 id="head">DAY</h3>
+                <input id="input1" type="text" placeholder="DD">
+            </div>
+            <div>
+                <h3>MONTH</h3>
+                <input id="input2" type="text" placeholder="MM">
+            </div>
+            <div>
+                <h3>YEAR</h3>
+                <input id="input3" type="text" placeholder="YYYY">
+            </div>
+        </div>
+        <div>
+            <button id="btn" type="button" onclick="age()">COUNT MY AGE</button>
+        </div>
+        <div class="output">
+            <h2 class="purple" id="year">--</h2>
+            <h2 class="out"> <i>years</i> </h2>
+        </div>
+        <div class="output">
+            <h2 class="purple" id="month">--</h2>
+            <h2 class="out"> <i>months</i></h2>
+        </div>
+        <div class="output">
+            <h2 class="purple" id="day">--</h2>
+            <h2 class="out"> <i>Days</i></h2>
+        </div>
+    </div>
+    <div>
+        <h4 class="coded">Coded by Moin Khan</h4>
+        <h4 class="challenge">Challenge by Frontend Mentor.</h4>
+    </div>
+
+    <script>
+        function age() {
+            var d1 = document.getElementById('input1').value
+            var m1 = document.getElementById('input2').value
+            var y1 = document.getElementById('input3').value
+
+            var date = new Date()
+            var d2 = date.getDate()
+            var m2 = 1 + date.getMonth()
+            var y2 = date.getFullYear()
+            var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            if (d1 > d2) {
+                d2 = d2 + month[m2 - 1];
+                m2 = m2 - 1;
+            }
+            if (m1 > m2) {
+                m2 = m2 + 12;
+                y2 = y2 - 1;
+            }
+
+            var d = d2 - d1
+            var m = m2 - m1
+            var y = y2 - y1
+
+            document.getElementById('year').innerHTML = y
+            document.getElementById('month').innerHTML = m
+            document.getElementById('day').innerHTML = d
+        }
+    </script>
+</body>
+
+</html>
